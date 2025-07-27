@@ -1,11 +1,11 @@
-import { Link } from "react-router";
 import { routes } from "./routes";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { AnimatePresence } from "motion/react";
+import { Link } from "react-router";
 
 const AppShell: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
@@ -15,24 +15,25 @@ const AppShell: React.FC<React.PropsWithChildren> = ({ children }) => {
           <NavigationMenu>
             <NavigationMenuList>
               {routes.map((route) => (
-                <NavigationMenuItem key={route.path}>
-                  <Link to={route.path}>
-                    <p className="p-1 text-gray-400 transition-colors hover:text-gray-800 hover:bg-gray-400 rounded">
-                      {route.name}
-                    </p>
-                  </Link>
-                </NavigationMenuItem>
+                <NavigationMenuItem
+                  key={route.path}
+                  object={route}
+                />
               ))}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
         <div className="justify-end">
-          <p className="font-bold text-gray-400">Hon Yi Hao</p>
+          <Link to={"https://www.linkedin.com/in/yi-hao-hon-614884219/"}>
+            <p className="font-bold text-gray-400">Hon Yi Hao</p>
+          </Link>
         </div>
       </header>
-      <div className="w-full overflow-auto">
-        <main>{children}</main>
-        <footer className="flex w-full h-12 items-center justify-center bg-gray-900 text-gray-400">
+      <div className="w-full align-center overflow-auto">
+        <AnimatePresence>
+          {children}
+        </AnimatePresence>
+        <footer className="flex flex-1 w-full h-12 items-center justify-center bg-gray-900 text-gray-400">
           <p>&copy; 2025 Yi Hao</p>
         </footer>
       </div>

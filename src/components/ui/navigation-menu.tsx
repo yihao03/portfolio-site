@@ -4,6 +4,13 @@ import { cva } from "class-variance-authority";
 import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import type { Route } from "@/types/routes";
+import { Link, useLocation } from "react-router";
+
+interface NavigationMenuItemProps extends React.ComponentProps<typeof NavigationMenuPrimitive.Item> {
+  object: Route;
+}
 
 function NavigationMenu({
   className,
@@ -47,14 +54,43 @@ function NavigationMenuList({
 
 function NavigationMenuItem({
   className,
+  object,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {
+}: NavigationMenuItemProps) {
+  const location = useLocation();
+  const isSelected = location.pathname === object.path;
+
   return (
-    <NavigationMenuPrimitive.Item
-      data-slot="navigation-menu-item"
-      className={cn("relative", className)}
-      {...props}
-    />
+    <motion.li
+      initial={false}
+      animate={{
+        opacity: 1,
+      }}
+      whileHover={{
+        scale: 1.05,
+      }}
+    >
+      <NavigationMenuPrimitive.Item
+        data-slot="navigation-menu-item"
+        className={cn("relative", className)}
+        asChild
+        {...props}
+      >
+        <div className="flex items-center">
+          <Link to={object.path}>
+            <p className="p-1 text-gray-400 transition-colors hover:text-gray-300 hover:bg-gray-700 rounded">
+              {object.name}
+            </p>
+          </Link>
+          {isSelected &&
+            <motion.div
+              animate={{ scale: 1 }}
+              className="w-full absolute h-0.5 bottom-0 bg-gray-400 rounded-md"
+              layoutId="nav"
+            />}
+        </div>
+      </NavigationMenuPrimitive.Item>
+    </motion.li>
   );
 }
 
