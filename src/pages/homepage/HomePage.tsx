@@ -1,5 +1,4 @@
 import Container from "@/components/Container";
-import { motion } from "motion/react";
 import type React from "react";
 import { Link } from "react-router";
 

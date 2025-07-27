@@ -1,5 +1,5 @@
 export interface Route {
   name: string;
   path: string;
-  component: React.FC<any>;
+  component: React.FC<object>;
 }
