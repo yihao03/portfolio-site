@@ -1,13 +1,9 @@
-import './App.css'
-import AppRouter from './pages/infrastructure/routing/AppRouter'
-import AppShell from './pages/infrastructure/routing/AppShell'
+import AppRouter from "./pages/infrastructure/routing/AppRouter";
 
 function App() {
   return (
-    <>
-      <AppRouter />
-    </>
-  )
+    <AppRouter />
+  );
 }
 
-export default App
+export default App;
