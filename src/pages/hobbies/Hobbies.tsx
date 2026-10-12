@@ -30,6 +30,37 @@ export default function Hobbies() {
                 at Victoria Concert Hall.
               </p>
             </div>
+            <section className="mt-10" aria-labelledby="roachman-heading">
+              <h3 id="roachman-heading" className="mb-4 text-2xl font-semibold text-gray-100">The Roachman Theme</h3>
+              <p className="text-lg leading-relaxed text-gray-300">
+                Not all heroes wear capes, but all of them deserve a theme song.
+                I composed and performed this yangqin solo inspired by Roachman in Sonny Liew’s{" "}
+                <em>The Art of Charlie Chan Hock Chye</em>, for NUS College’s Global Narratives course (NGN2001G).
+              </p>
+              <p className="mt-4 text-base leading-7 text-gray-400">
+                The music follows Ah Guan from his humble beginnings to his life as Roachman,
+                using harmonics, tremolo and chromatic runs to tell his story.
+                It’s a tribute to the underdogs and unsung heroes who help others without seeking recognition.
+              </p>
+              <figure className="mt-6">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/KiD11UO80gs"
+                  title="The Roachman Theme — original yangqin composition and performance by Yi Hao"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="aspect-video h-auto w-full rounded-md border-0"
+                />
+                <figcaption className="mt-3 text-sm">
+                  <a href="https://youtu.be/KiD11UO80gs" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
+                    Watch on YouTube <span aria-hidden="true">↗</span>
+                  </a>
+                </figcaption>
+              </figure>
+            </section>
           </section>
         </div>
       </section>
