@@ -1,6 +1,20 @@
 import Container from "@/components/Container";
 
-const projects = [
+interface Project {
+  name: string;
+  role: string;
+  period: string;
+  summary: string;
+  description: string;
+  focus: string[];
+  href: string | null;
+  linkLabel?: string;
+  extraLinks?: { label: string; href: string }[];
+  screenshots?: { src: string; alt: string; caption: string }[];
+}
+
+const projects: Project[] = [
+
   {
     name: "ReMindMe",
     role: "Freelance Developer",
@@ -28,6 +42,59 @@ const projects = [
     focus: ["Internationalisation", "Translation automation", "Educational tooling"],
     href: null,
   },
+
+  {
+    name: "Historical Adventures",
+    role: "CS3216 · Assignment 3",
+    period: "CS3216 project",
+    summary: "Historical sources become playable worlds where students explore evidence, meet competing stakeholders and make consequential decisions.",
+    description: "Contributed the adventure generation pipeline, Phaser renderer and game client, and teacher-console generation flows. The platform lets teachers turn source material into interactive adventures, with a debrief that distinguishes documented history from simulation assumptions.",
+    focus: ["AI generation", "Phaser", "Next.js"],
+    href: "https://historical-adventures-ten.vercel.app",
+    linkLabel: "Explore the app",
+    extraLinks: [{ label: "Source code", href: "https://github.com/damiancxliew/CS3216_Assignment3" }],
+  },
+  {
+    name: "Dueet",
+    role: "CS3216 · Team project",
+    period: "CS3216 project",
+    summary: "A social productivity concept that helps friends build momentum together.",
+    description: "The interactive landing page presents daily planning, shared progress and check-ins, alongside voice and photo task capture, Canvas assignment syncing and suggested next tasks. Scroll-driven mobile previews bring the product’s workflows to life.",
+    focus: ["Product design", "Social productivity", "Interactive storytelling"],
+    href: "https://yihao03.github.io/dueet_landing/",
+    linkLabel: "Explore Dueet",
+  },
+  {
+    name: "Neovim",
+    role: "Personal configuration",
+    period: "Developer setup",
+    summary: "A keyboard-first development environment built on LazyVim, tailored to how I work.",
+    description: "Custom Lua modules bring repository issues and pull requests into the dashboard, alongside coding, debugging, AI assistance and Markdown and LaTeX workflows. A little terminal personality makes the workspace feel like home.",
+    focus: ["Lua", "LazyVim", "Developer tooling"],
+    href: "https://github.com/yihao03/nvim",
+    linkLabel: "View configuration",
+    screenshots: [
+      { src: "/images/projects/neovim-pr.png", alt: "Neovim dashboard showing the file explorer, recent files, open issues and pull requests", caption: "Repository dashboard with issues and pull requests" },
+      { src: "/images/projects/neovim-no-pr.png", alt: "Neovim dashboard in a repository without issues or pull requests", caption: "Dashboard without repository issues or pull requests" },
+    ],
+  },
+  {
+    name: "Hyprland",
+    role: "Personal configuration",
+    period: "Developer setup",
+    summary: "A modular Linux desktop configuration with Vim-style navigation and consistent keyboard shortcuts.",
+    description: "Lua modules adapt the same controls to dwindle and scrolling layouts, with modes for moving windows and managing displays. Workspace navigation, monitor mirroring, lid handling and session management are integrated into the everyday workflow.",
+    focus: ["Lua", "Linux", "Keyboard-driven workflow"],
+    href: "https://github.com/yihao03/hyprland-dots",
+    linkLabel: "View configuration",
+  },
+
+];
+
+const groups = [
+  { title: "Selected work", projects: projects.slice(0, 3), offset: 0 },
+  { title: "CS3216 projects", projects: projects.slice(3, 5), offset: 3 },
+  { title: "Developer setup", projects: projects.slice(5), offset: 5 },
 ];
 
 export default function Projects() {
@@ -35,38 +102,59 @@ export default function Projects() {
     <Container>
       <section className="mx-auto w-full max-w-5xl px-2 pb-16 sm:px-6" aria-labelledby="projects-heading">
         <header className="mb-14 sm:mb-20">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-blue-300">Selected work / 01–03</p>
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-blue-300">Things I build</p>
           <h1 id="projects-heading" className="font-bold tracking-tight text-gray-100">Projects</h1>
         </header>
-        <div className="space-y-16 sm:space-y-24">
-          {projects.map((project, index) => (
-            <article key={project.name} className="grid gap-5 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-6">
-              <p aria-hidden="true" className="pt-1 font-mono text-sm text-gray-500">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-                <div>
-                  <p className="mb-3 text-xs uppercase tracking-widest text-gray-400">{project.period}</p>
-                  <h2 className="text-3xl font-semibold leading-tight tracking-tight text-gray-100 sm:text-4xl">
-                    {project.name}
-                  </h2>
-                  <p className="mt-3 text-sm text-blue-200">{project.role}</p>
-                  {project.href && (
-                    <a href={project.href} target="_blank" rel="noopener noreferrer" className="group mt-6 inline-flex items-center gap-2 text-sm text-blue-300 transition-colors hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                      Visit {project.name}
-                      <span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
-                    </a>
-                  )}
-                </div>
-                <div>
-                  <p className="text-xl leading-relaxed text-gray-200">{project.summary}</p>
-                  <p className="mt-5 max-w-prose text-base leading-7 text-gray-400">{project.description}</p>
-                  <ul aria-label="Project focus" className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-500">
-                    {project.focus.map((focus) => <li key={focus}>{focus}</li>)}
-                  </ul>
-                </div>
+        <div className="space-y-24 sm:space-y-32">
+          {groups.map((group) => (
+            <section key={group.title} aria-label={group.title}>
+              <h2 className="mb-10 text-xs font-medium uppercase tracking-[0.25em] text-blue-300">{group.title}</h2>
+              <div className="space-y-16 sm:space-y-24">
+                {group.projects.map((project, index) => (
+                  <article key={project.name} className="grid gap-5 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-6">
+                    <p aria-hidden="true" className="pt-1 font-mono text-sm text-gray-500">{String(group.offset + index + 1).padStart(2, "0")}</p>
+                    <div>
+                      <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+                        <div>
+                          <p className="mb-3 text-xs uppercase tracking-widest text-gray-400">{project.period}</p>
+                          <h3 className="text-3xl font-semibold leading-tight tracking-tight text-gray-100 sm:text-4xl">{project.name}</h3>
+                          <p className="mt-3 text-sm text-blue-200">{project.role}</p>
+                          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+                            {project.href && (
+                              <a href={project.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-sm text-blue-300 transition-colors hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
+                                {project.linkLabel ?? "Visit " + project.name}<span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                              </a>
+                            )}
+                            {project.extraLinks?.map((link) => (
+                              <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-300 hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">{link.label} <span aria-hidden="true">↗</span></a>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-xl leading-relaxed text-gray-200">{project.summary}</p>
+                          <p className="mt-5 max-w-prose text-base leading-7 text-gray-400">{project.description}</p>
+                          <ul aria-label="Project focus" className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-400">
+                            {project.focus.map((focus) => <li key={focus}>{focus}</li>)}
+                          </ul>
+                        </div>
+                      </div>
+                      {project.screenshots && (
+                        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                          {project.screenshots.map((screenshot) => (
+                            <figure key={screenshot.src} className="min-w-0">
+                              <a href={screenshot.src} target="_blank" rel="noopener noreferrer" className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
+                                <img src={screenshot.src} alt={screenshot.alt} width={1920} height={1080} loading="lazy" decoding="async" className="h-auto w-full rounded-md" />
+                              </a>
+                              <figcaption className="mt-3 text-xs leading-relaxed text-gray-400">{screenshot.caption}</figcaption>
+                            </figure>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                ))}
               </div>
-            </article>
+            </section>
           ))}
         </div>
       </section>
