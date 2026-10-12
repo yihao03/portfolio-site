@@ -19,7 +19,7 @@ const rawContacts: Contact[] = [
     icon: PiLinkedinLogoDuotone,
     name: "LinkedIn",
     username: "Yi Hao Hon",
-    link: "https://www.linkedin.com/in/yi-hao-hon-614884219/"
+    link: "https://www.linkedin.com/in/yihaooo"
   }
 ]
 
