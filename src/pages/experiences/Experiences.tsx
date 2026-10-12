@@ -4,7 +4,12 @@ const experiences = [
   {
     role: "Team Lead",
     organisation: "Computing for Voluntary Welfare Organization",
+    organisationHref: "https://www.comp.nus.edu.sg/~vwo/",
     period: "May–Aug 2026",
+    links: [
+      { label: "Punaravartan · 2026", href: "https://www.comp.nus.edu.sg/~vwo/projects/2026-punaravartan.html" },
+      { label: "KWSH · 2026", href: "https://www.comp.nus.edu.sg/~vwo/projects/2026-kwsh.html" },
+    ],
     summary: "Led five developers to build Project UMA, an intelligence platform for the Punaravartan Foundation, supporting the Cambodian government’s work to recover lost and stolen cultural artifacts.",
     highlights: [
       "Built a purpose-designed platform for a digital library of over 15,000 files, with customisable artifact metadata, tags and collections.",
@@ -31,7 +36,12 @@ const experiences = [
   {
     role: "Full Stack Developer",
     organisation: "Computing for Voluntary Welfare Organization",
+    organisationHref: "https://www.comp.nus.edu.sg/~vwo/",
     period: "May–Aug 2025",
+    links: [
+      { label: "KWSH · 2025", href: "https://www.comp.nus.edu.sg/~vwo/projects/2025-kwsh.html" },
+      { label: "AAC · 2025", href: "https://www.comp.nus.edu.sg/~vwo/projects/2025-aac.html" },
+    ],
     summary: "Helped modernise a Home Personal Care system, migrating a legacy Ruby on Rails application to a multi-tenant React and Go architecture.",
     highlights: [
       "Built real-time messaging between nurses and patients’ next of kin using WebSockets across web and React Native applications.",
@@ -53,7 +63,13 @@ export default function Experiences() {
                 <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <h2 className="text-2xl font-semibold text-gray-100">{experience.role}</h2>
-                    <p className="mt-1 text-base text-blue-200">{experience.organisation}</p>
+                    <p className="mt-1 text-base text-blue-200">
+                      {"organisationHref" in experience && experience.organisationHref ? (
+                        <a href={experience.organisationHref} target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-blue-100 hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
+                          {experience.organisation}
+                        </a>
+                      ) : experience.organisation}
+                    </p>
                   </div>
                   <p className="shrink-0 text-sm text-gray-400">{experience.period}</p>
                 </div>
