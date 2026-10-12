@@ -24,7 +24,7 @@ const AppShell: React.FC<React.PropsWithChildren> = ({ children }) => {
           </NavigationMenu>
         </div>
         <div className="hidden justify-end sm:block">
-          <Link to={"https://www.linkedin.com/in/yi-hao-hon-614884219/"}>
+          <Link to={"https://www.linkedin.com/in/yihaooo"}>
             <p className="font-bold text-gray-400">Hon Yi Hao</p>
           </Link>
         </div>
