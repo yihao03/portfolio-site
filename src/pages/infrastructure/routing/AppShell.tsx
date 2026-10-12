@@ -12,7 +12,7 @@ const AppShell: React.FC<React.PropsWithChildren> = ({ children }) => {
     <div className="h-screen w-screen flex flex-col items-center bg-gray-800">
       <header className="w-full flex h-fit shrink-0 flex-wrap items-center gap-2 bg-gray-900 p-2 px-3 shadow z-10 sm:px-6">
         <div className="min-w-0 flex-1 align-center">
-          <NavigationMenu className="max-w-full">
+          <NavigationMenu className="justify-start">
             <NavigationMenuList className="flex-wrap justify-start">
               {routes.map((route) => (
                 <NavigationMenuItem
