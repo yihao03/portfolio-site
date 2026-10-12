@@ -10,6 +10,13 @@ export default function Hobbies() {
             <h2 id="cycling-heading" className="mb-4 text-3xl font-semibold tracking-tight text-gray-100">Cycling</h2>
             <p className="text-lg leading-relaxed text-gray-300">I enjoy cycling and currently ride a Giant Roam 4.</p>
           </section>
+          <section aria-labelledby="photography-heading">
+            <h2 id="photography-heading" className="mb-4 text-3xl font-semibold tracking-tight text-gray-100">Photography</h2>
+            <p className="text-lg leading-relaxed text-gray-300">
+              I’m also into photography, especially street and event photography.
+              I currently shoot with a Nikon Zfc and Z6.
+            </p>
+          </section>
           <section aria-labelledby="yangqin-heading">
             <h2 id="yangqin-heading" className="mb-4 text-3xl font-semibold tracking-tight text-gray-100">Yangqin</h2>
             <div className="space-y-5 text-lg leading-relaxed text-gray-300">
