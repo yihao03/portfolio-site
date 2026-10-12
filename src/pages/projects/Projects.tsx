@@ -9,6 +9,7 @@ interface Project {
   href: string | null;
   linkLabel?: string;
   extraLinks?: { label: string; href: string }[];
+  videoId?: string;
   screenshots?: { src: string; alt: string; caption: string }[];
 }
 
@@ -40,8 +41,9 @@ const projects: Project[] = [
   },
 
   {
-    name: "Historical Adventures",
+    name: "Pocket Adventures",
     role: "CS3216 · Assignment 3",
+    videoId: "VF4KtwkR5fw",
     summary: "Historical sources become playable worlds where students explore evidence, meet competing stakeholders and make consequential decisions.",
     description: "Contributed the adventure generation pipeline, Phaser renderer and game client, and teacher-console generation flows. The platform lets teachers turn source material into interactive adventures, with a debrief that distinguishes documented history from simulation assumptions.",
     href: "https://historical-adventures-ten.vercel.app",
@@ -55,6 +57,14 @@ const projects: Project[] = [
     description: "The interactive landing page presents daily planning, shared progress and check-ins, alongside voice and photo task capture, Canvas assignment syncing and suggested next tasks. Scroll-driven mobile previews bring the product’s workflows to life.",
     href: "https://yihao03.github.io/dueet_landing/",
     linkLabel: "Explore Dueet",
+  },
+  {
+    name: "Friend on Campus",
+    role: "CS3219 · Software Design and Architecture",
+    summary: "A campus errand platform used to experiment with software architecture.",
+    description: "Exploring microservices, event-driven communication, the saga pattern and Docker orchestration through a system where students request and fulfil campus errands. The project separates users, suppliers, orders and credits into services, with a SvelteKit frontend and Go backends.",
+    href: "https://github.com/AY2627S1-CS3219-P1/FoC",
+    linkLabel: "Source code",
   },
   {
     name: "Neovim",
@@ -81,8 +91,8 @@ const projects: Project[] = [
 
 const groups = [
   { title: "Projects", projects: projects.slice(0, 3) },
-  { title: "CS3216 projects", projects: projects.slice(3, 5) },
-  { title: "Developer setup", projects: projects.slice(5) },
+  { title: "Notable Coursework", projects: projects.slice(3, 6) },
+  { title: "Developer setup", projects: projects.slice(6) },
 ];
 
 export default function Projects() {
@@ -121,6 +131,24 @@ export default function Projects() {
                           <p className="mt-5 max-w-prose text-base leading-7 text-gray-400">{project.description}</p>
                         </div>
                       </div>
+                      {project.videoId && (
+                        <figure className="mt-10">
+                          <iframe
+                            src={"https://www.youtube-nocookie.com/embed/" + project.videoId}
+                            title={project.name + " demo"}
+                            width="960"
+                            height="540"
+                            loading="lazy"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            className="aspect-video h-auto w-full rounded-md"
+                          />
+                          <figcaption className="mt-3 text-sm">
+                            <a href={"https://www.youtube.com/watch?v=" + project.videoId} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200">Watch on YouTube <span aria-hidden="true">↗</span></a>
+                          </figcaption>
+                        </figure>
+                      )}
                       {project.screenshots && (
                         <div className="mt-10 grid gap-6 sm:grid-cols-2">
                           {project.screenshots.map((screenshot) => (
