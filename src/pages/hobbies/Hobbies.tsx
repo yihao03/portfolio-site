@@ -3,21 +3,22 @@ import Container from "@/components/Container";
 export default function Hobbies() {
   return (
     <Container>
-      <section className="mx-auto w-full max-w-3xl px-2 pb-16 sm:px-6" aria-labelledby="hobbies-heading">
+      <section className="mx-auto w-[calc(100vw-2rem)] max-w-6xl px-2 pb-16 sm:px-6" aria-labelledby="hobbies-heading">
         <h1 id="hobbies-heading" className="mb-12 font-bold tracking-tight text-gray-100">Hobbies</h1>
-        <div className="space-y-12">
-          <section aria-labelledby="cycling-heading">
+        <div className="divide-y divide-white/10">
+          <section className="pb-10" aria-labelledby="cycling-heading">
             <h2 id="cycling-heading" className="mb-4 text-3xl font-semibold tracking-tight text-gray-100">Cycling</h2>
             <p className="text-lg leading-relaxed text-gray-300">I enjoy cycling and currently ride a Giant Roam 4.</p>
           </section>
-          <section aria-labelledby="photography-heading">
+          <section className="py-10" aria-labelledby="photography-heading">
             <h2 id="photography-heading" className="mb-4 text-3xl font-semibold tracking-tight text-gray-100">Photography</h2>
             <p className="text-lg leading-relaxed text-gray-300">
               I’m also into photography, especially street and event photography.
               I currently shoot with a Nikon Zfc and Z6.
             </p>
           </section>
-          <section aria-labelledby="yangqin-heading">
+          <section className="grid gap-10 pt-10 lg:grid-cols-2 lg:gap-14" aria-labelledby="yangqin-heading">
+            <div className="min-w-0">
             <h2 id="yangqin-heading" className="mb-4 text-3xl font-semibold tracking-tight text-gray-100">Yangqin</h2>
             <div className="space-y-5 text-lg leading-relaxed text-gray-300">
               <p>
@@ -37,7 +38,8 @@ export default function Hobbies() {
                 at Victoria Concert Hall.
               </p>
             </div>
-            <section className="mt-10" aria-labelledby="roachman-heading">
+            </div>
+            <section className="min-w-0" aria-labelledby="roachman-heading">
               <h3 id="roachman-heading" className="mb-4 text-2xl font-semibold text-gray-100">The Roachman Theme</h3>
               <p className="text-lg leading-relaxed text-gray-300">
                 Not all heroes wear capes, but all of them deserve a theme song.
