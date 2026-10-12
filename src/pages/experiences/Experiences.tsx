@@ -44,7 +44,6 @@ export default function Experiences() {
   return (
     <Container>
       <section className="mx-auto w-full max-w-4xl px-2 pb-12 sm:px-6" aria-labelledby="experience-heading">
-        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-blue-300">Building with purpose</p>
         <h1 id="experience-heading" className="mb-10 font-bold text-gray-100">Experience</h1>
         <ol className="space-y-10 border-l border-gray-600 pl-5 sm:pl-8">
           {experiences.map((experience) => (
@@ -56,7 +55,7 @@ export default function Experiences() {
                     <h2 className="text-2xl font-semibold text-gray-100">{experience.role}</h2>
                     <p className="mt-1 text-base text-blue-200">{experience.organisation}</p>
                   </div>
-                  <p className="shrink-0 text-sm text-gray-400">{experience.period} · Singapore</p>
+                  <p className="shrink-0 text-sm text-gray-400">{experience.period}</p>
                 </div>
                 <p className="mt-4 leading-relaxed text-gray-300">{experience.summary}</p>
                 <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed text-gray-400">
