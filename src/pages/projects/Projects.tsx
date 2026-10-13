@@ -108,7 +108,7 @@ export default function Projects() {
               {group.title !== "Projects" && <h2 className="mb-10 text-lg font-semibold text-gray-200">{group.title}</h2>}
               <div className="space-y-16 sm:space-y-24">
                 {group.projects.map((project) => (
-                  <article key={project.name} className="w-full">
+                  <article id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")} key={project.name} className="w-full scroll-mt-6">
                     <div>
                       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
                         <div>

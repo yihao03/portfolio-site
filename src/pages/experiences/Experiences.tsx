@@ -2,6 +2,15 @@ import Container from "@/components/Container";
 
 const experiences = [
   {
+    id: "cs2103t-ta",
+    role: "Teaching Assistant",
+    organisation: "National University of Singapore",
+    period: "AY2025/26 Semester 2–Present",
+    summary: "Teaching assistant for CS2103T Software Engineering in AY2025/26 Semester 2 and AY2026/27 Semester 1.",
+    highlights: [],
+  },
+  {
+    id: "cvwo-2026",
     role: "Team Lead",
     organisation: "Computing for Voluntary Welfare Organization",
     organisationHref: "https://www.comp.nus.edu.sg/~vwo/",
@@ -20,6 +29,7 @@ const experiences = [
     ],
   },
   {
+    id: "nusc-tech",
     role: "Technical Co-Director",
     organisation: "NUS College Managing Committee",
     period: "Sep 2025–Present",
@@ -34,6 +44,7 @@ const experiences = [
     ],
   },
   {
+    id: "cvwo-2025",
     role: "Full Stack Developer",
     organisation: "Computing for Voluntary Welfare Organization",
     organisationHref: "https://www.comp.nus.edu.sg/~vwo/",
@@ -57,7 +68,7 @@ export default function Experiences() {
         <h1 id="experience-heading" className="mb-10 font-bold text-gray-100">Experience</h1>
         <ol className="space-y-10 border-l border-gray-600 pl-5 sm:pl-8">
           {experiences.map((experience) => (
-            <li key={experience.role + experience.period} className="relative">
+            <li id={experience.id} key={experience.id} className="relative scroll-mt-6">
               <span aria-hidden="true" className="absolute -left-[27px] top-2 h-3 w-3 rounded-full border-2 border-gray-800 bg-blue-300 sm:-left-[39px]" />
               <article>
                 <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
@@ -74,9 +85,9 @@ export default function Experiences() {
                   <p className="shrink-0 text-sm text-gray-400">{experience.period}</p>
                 </div>
                 <p className="mt-4 leading-relaxed text-gray-300">{experience.summary}</p>
-                <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed text-gray-400">
+                {experience.highlights.length > 0 && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed text-gray-400">
                   {experience.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-                </ul>
+                </ul>}
                 {"links" in experience && experience.links && (
                   <div className="mt-5 flex flex-wrap gap-4">
                     {experience.links.map((link) => (

@@ -3,6 +3,7 @@ import HomePage from "@/pages/homepage/HomePage";
 import Experiences from "@/pages/experiences/Experiences";
 import Projects from "@/pages/projects/Projects";
 import Hobbies from "@/pages/hobbies/Hobbies";
+import Education from "@/pages/education/Education";
 import type { Route } from "@/types/routes";
 
 export const routes: Route[] = [
@@ -20,6 +21,11 @@ export const routes: Route[] = [
     name: "Projects",
     path: "/projects",
     component: Projects,
+  },
+  {
+    name: "Education",
+    path: "/education",
+    component: Education,
   },
   {
     name: "Hobbies",
