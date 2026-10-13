@@ -67,6 +67,20 @@ const projects: Project[] = [
     linkLabel: "Source code",
   },
   {
+    name: "2D Particle Collision Simulator",
+    role: "CS3210 · Parallel Computing",
+    summary: "A 2D particle collision simulator for exploring parallel computation.",
+    description: "Coursework focused on particle movement and collision detection, balancing parallel performance with simulation correctness.",
+    href: null,
+  },
+  {
+    name: "CUDA Ray Tracing",
+    role: "CS3210 · Parallel Computing",
+    summary: "Ray tracing on the GPU using CUDA.",
+    description: "Coursework exploring GPU parallelism and performance optimisation for rendering, with profiling to understand bottlenecks and checks for image correctness.",
+    href: null,
+  },
+  {
     name: "Neovim",
     role: "Personal configuration",
     summary: "A keyboard-first development environment built on LazyVim, tailored to how I work.",
@@ -91,8 +105,8 @@ const projects: Project[] = [
 
 const groups = [
   { title: "Projects", projects: projects.slice(0, 3) },
-  { title: "Notable Coursework", projects: projects.slice(3, 6) },
-  { title: "Developer setup", projects: projects.slice(6) },
+  { title: "Notable Coursework", projects: projects.slice(3, 8) },
+  { title: "Developer setup", projects: projects.slice(8) },
 ];
 
 export default function Projects() {

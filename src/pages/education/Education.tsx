@@ -10,6 +10,7 @@ interface Course {
   credential?: string;
   link?: string;
   linkLabel?: string;
+  projectLinks?: { label: string; href: string }[];
 }
 
 const groups: { title: string; courses: Course[] }[] = [
@@ -17,7 +18,15 @@ const groups: { title: string; courses: Course[] }[] = [
     title: "Currently Taking",
     courses: [
       { code: "CS3235", name: "Computer Security", status: "In progress" },
-      { code: "CS3210", name: "Parallel Computing", status: "In progress" },
+      {
+        code: "CS3210",
+        name: "Parallel Computing",
+        status: "In progress",
+        projectLinks: [
+          { label: "2D particle collision simulator", href: "/projects#2d-particle-collision-simulator" },
+          { label: "CUDA ray tracing", href: "/projects#cuda-ray-tracing" },
+        ],
+      },
     ],
   },
   {
@@ -161,12 +170,13 @@ export default function Education() {
                     <span className="font-mono text-sm text-gray-400">{course.code}</span>
                     <div className="col-start-1 row-start-2 mt-1 min-w-0 sm:col-start-2 sm:row-start-1 sm:mt-0">
                       <p className="text-base text-gray-200">{course.name}</p>
-                      {(course.topStudent || course.link) && (
+                      {(course.topStudent || course.link || course.projectLinks?.length) && (
                         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
                           {course.topStudent && (course.credential ? (
                             <a href={course.credential} target="_blank" rel="noopener noreferrer" className={linkStyle}>Top student · View award ↗</a>
                           ) : <span className="text-sm text-blue-200">Top student</span>)}
                           {course.link && <Link to={course.link} className={linkStyle}>{course.linkLabel} ↗</Link>}
+                          {course.projectLinks?.map((project) => <Link key={project.href} to={project.href} className={linkStyle}>{project.label} ↗</Link>)}
                         </div>
                       )}
                     </div>
