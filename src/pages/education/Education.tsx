@@ -4,7 +4,8 @@ import { Link } from "react-router";
 interface Course {
   code: string;
   name: string;
-  grade: string;
+  grade?: string;
+  status?: string;
   topStudent?: boolean;
   credential?: string;
   link?: string;
@@ -12,6 +13,13 @@ interface Course {
 }
 
 const groups: { title: string; courses: Course[] }[] = [
+  {
+    title: "Currently Taking",
+    courses: [
+      { code: "CS3235", name: "Computer Security", status: "In progress" },
+      { code: "CS3210", name: "Parallel Computing", status: "In progress" },
+    ],
+  },
   {
     "title": "Systems & Security",
     "courses": [
@@ -162,7 +170,7 @@ export default function Education() {
                         </div>
                       )}
                     </div>
-                    <span aria-label={"Grade " + course.grade} className={"col-start-2 row-start-1 text-base font-semibold sm:col-start-3 " + (course.grade === "A+" ? "text-blue-300" : "text-gray-200")}>{course.grade}</span>
+                    <span aria-label={course.grade ? "Grade " + course.grade : course.status} className={"col-start-2 row-start-1 text-base font-semibold sm:col-start-3 " + (course.grade === "A+" ? "text-blue-300" : "text-gray-200")}>{course.grade ?? course.status}</span>
                   </li>
                 ))}
               </ul>
