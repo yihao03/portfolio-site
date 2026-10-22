@@ -52,13 +52,14 @@ const groups: { title: string; courses: Course[] }[] = [
       {
         "code": "CS2100",
         "name": "Computer Organisation",
-        "grade": "A-"
       }
     ]
   },
   {
     "title": "Software & Applied Projects",
     "courses": [
+      { code: "CP3108A", name: "Independent Work" },
+      { code: "NEP3001", name: "Impact Experience Project", status: "In progress" },
       {
         "code": "CS2103T",
         "name": "Software Engineering",
@@ -84,7 +85,6 @@ const groups: { title: string; courses: Course[] }[] = [
       {
         "code": "CP3110",
         "name": "CVWO 2026",
-        "grade": "A",
         "link": "/experiences#cvwo-2026",
         "linkLabel": "View experience"
       }
@@ -93,6 +93,7 @@ const groups: { title: string; courses: Course[] }[] = [
   {
     "title": "Programming & Algorithms",
     "courses": [
+      { code: "CS2040S", name: "Data Structures and Algorithms" },
       {
         "code": "CS1101S",
         "name": "Programming Methodology",
@@ -101,17 +102,14 @@ const groups: { title: string; courses: Course[] }[] = [
       {
         "code": "CS2030S",
         "name": "Programming Methodology II",
-        "grade": "A"
       },
       {
         "code": "CS3230",
         "name": "Design and Analysis of Algorithms",
-        "grade": "A"
       },
       {
         "code": "CS1231S",
         "name": "Discrete Structures",
-        "grade": "A"
       }
     ]
   },
@@ -136,14 +134,32 @@ const groups: { title: string; courses: Course[] }[] = [
       {
         "code": "MA1521",
         "name": "Calculus for Computing",
-        "grade": "A"
       },
       {
         "code": "CS2109S",
         "name": "Introduction to AI and Machine Learning",
-        "grade": "A"
       }
     ]
+  },
+  {
+    title: "Humanities & Society",
+    courses: [
+      { code: "NGN2001G", name: "Global Narratives", link: "/hobbies#roachman-heading", linkLabel: "The Roachman Theme" },
+      { code: "NSW2001I", name: "Understanding the Social World: Singapore & Beyond" },
+      { code: "NHS2075", name: "Life at the Bottom" },
+      { code: "NTW2040", name: "The Limits of Money" },
+      { code: "NGT2001D", name: "Global Social Thought" },
+      { code: "NST2062", name: "Mind and Machine" },
+      { code: "IS1108", name: "Digital Ethics and Data Privacy" },
+    ],
+  },
+  {
+    title: "Communication & Music",
+    courses: [
+      { code: "CS2101", name: "Effective Communication for Computing Professionals" },
+      { code: "CFA1101A", name: "Performing Arts in Practice (Music) 1" },
+      { code: "CFA2101A", name: "Performing Arts in Practice (Music) 2" },
+    ],
   }
 ];
 
@@ -159,7 +175,7 @@ export default function Education() {
           <p className="mt-2 text-gray-400">Bachelor of Computing in Computer Science · NUS College</p>
           <Link to="/experiences#cs2103t-ta" className={linkStyle + " mt-4 inline-block"}>Teaching Assistant · CS2103T ↗</Link>
         </header>
-        <h2 className="mb-8 text-2xl font-semibold text-gray-100">Notable Classes</h2>
+        <h2 className="mb-8 text-2xl font-semibold text-gray-100">Coursework</h2>
         <div className="space-y-10">
           {groups.map((group) => (
             <section key={group.title} aria-label={group.title}>
@@ -180,7 +196,9 @@ export default function Education() {
                         </div>
                       )}
                     </div>
-                    <span aria-label={course.grade ? "Grade " + course.grade : course.status} className={"col-start-2 row-start-1 text-base font-semibold sm:col-start-3 " + (course.grade === "A+" ? "text-blue-300" : "text-gray-200")}>{course.grade ?? course.status}</span>
+                    {(course.grade === "A+" || course.status) && (
+                      <span aria-label={course.grade === "A+" ? "Grade A+" : course.status} className={"col-start-2 row-start-1 text-base font-semibold sm:col-start-3 " + (course.grade === "A+" ? "text-blue-300" : "text-gray-200")}>{course.grade === "A+" ? "A+" : course.status}</span>
+                    )}
                   </li>
                 ))}
               </ul>
