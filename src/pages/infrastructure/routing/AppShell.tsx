@@ -78,7 +78,7 @@ const AppShell: React.FC<React.PropsWithChildren> = ({ children }) => {
         {children}
       </main>
       <footer className="border-t border-white/10 bg-gray-900">
-        <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-5 py-6 text-sm text-gray-400 sm:px-8">
+        <div className="flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-5 py-6 text-sm text-gray-400 sm:px-10">
           <p>&copy; {new Date().getFullYear()} Hon Yi Hao</p>
           <Link
             to="/contact"
