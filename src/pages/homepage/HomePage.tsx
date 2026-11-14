@@ -9,8 +9,9 @@ export default function HomePage() {
         <h1 id="home-heading" className="mb-8 font-bold tracking-tight text-gray-100">Hi, I’m Yi Hao.</h1>
         <div className="space-y-6 text-lg leading-relaxed text-gray-300">
           <p>
-            I’m a Year 3 Computer Science student at NUS and{" "}
-            <a href="https://nuscollege.nus.edu.sg" target="_blank" rel="noopener noreferrer" className={linkStyle}>NUS College</a>.
+            I’m a Year 3 Computer Science student at NUS. I enjoy building interesting products and solving difficult problems. I’m also part of{" "}
+            <a href="https://nuscollege.nus.edu.sg" target="_blank" rel="noopener noreferrer" className={linkStyle}>NUS College</a>,
+            where I explore topics in philosophy, nature, and social issues like poverty.
           </p>
           <p>
             I care about making an impact through technology and through the people I work with. I enjoy building tools that help others do meaningful work, and I find it just as rewarding to mentor someone or help a team develop its abilities.
