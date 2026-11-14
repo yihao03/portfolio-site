@@ -31,6 +31,32 @@ const groups: { id: string; title: string; courses: Course[] }[] = [
           { label: "CUDA ray tracing", href: "/projects#cuda-ray-tracing" },
         ],
       },
+      {
+        code: "CS3216",
+        name: "Software Product Engineering for Digital Markets",
+        status: "In progress",
+        projectLinks: [
+          { label: "Pocket Adventures", href: "/projects#pocket-adventures" },
+          { label: "Dueet", href: "/projects#dueet" },
+        ],
+      },
+      {
+        code: "CS3219",
+        name: "Software Design and Architecture",
+        status: "In progress",
+        link: "/projects#friend-on-campus",
+        linkLabel: "Friend on Campus",
+      },
+      {
+        code: "IT2900",
+        name: "Technical Management and Leadership",
+        status: "In progress",
+      },
+      {
+        code: "NHS2108",
+        name: "Morality: Fact or Fiction",
+        status: "In progress",
+      },
     ],
   },
   {
