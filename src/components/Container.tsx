@@ -18,7 +18,7 @@ export default function Container({ children }: PropsWithChildren) {
   }, [pathname, hash]);
 
   return (
-    <div className="w-full max-w-5xl px-5 py-12 sm:px-10 sm:py-20">
+    <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-20">
       {children}
     </div>
   );

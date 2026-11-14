@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import { PageIndexMenu, PageIndexSidebar } from "@/components/PageIndex";
 import { Link } from "react-router";
 
 interface Course {
@@ -13,7 +14,7 @@ interface Course {
   projectLinks?: { label: string; href: string }[];
 }
 
-const groups: { title: string; courses: Course[] }[] = [
+const groups: { id: string; title: string; courses: Course[] }[] = [
   {
     title: "Currently taking",
     courses: [
@@ -180,7 +181,12 @@ const groups: { title: string; courses: Course[] }[] = [
       { code: "CFA2101A", name: "Performing Arts in Practice (Music) 2" },
     ],
   },
-];
+].map((group) => ({
+  ...group,
+  id: group.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+}));
+
+const indexSections = groups.map(({ id, title }) => ({ id, title }));
 
 const linkStyle =
   "text-sm text-blue-300 underline underline-offset-4 hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300";
@@ -188,11 +194,12 @@ const linkStyle =
 export default function Education() {
   return (
     <Container>
-      <section className="w-full max-w-3xl" aria-labelledby="education-heading">
+      <section className="w-full" aria-labelledby="education-heading">
         <header className="mb-12">
-          <h1 id="education-heading" className="mb-8">
-            Education
-          </h1>
+          <div className="mb-8 flex items-center justify-between gap-6">
+            <h1 id="education-heading">Education</h1>
+            <PageIndexMenu sections={indexSections} label="Education index" />
+          </div>
           <h2 className="text-xl font-semibold text-gray-200">
             National University of Singapore
           </h2>
@@ -206,82 +213,89 @@ export default function Education() {
             Teaching assistant for CS2103T
           </Link>
         </header>
-        <h2 className="mb-8 text-2xl font-semibold text-gray-100">
-          Coursework
-        </h2>
-        <div className="space-y-10">
-          {groups.map((group) => (
-            <section key={group.title} aria-label={group.title}>
-              <h3 className="mb-3 text-base font-semibold text-gray-200">
-                {group.title}
-              </h3>
-              <ul className="divide-y divide-white/10">
-                {group.courses.map((course) => (
-                  <li
-                    key={course.code}
-                    className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 py-4 sm:grid-cols-[6rem_minmax(0,1fr)_auto]"
-                  >
-                    <span className="text-sm font-medium text-gray-400">
-                      {course.code}
-                    </span>
-                    <div className="col-start-1 row-start-2 mt-1 min-w-0 sm:col-start-2 sm:row-start-1 sm:mt-0">
-                      <p className="text-base text-gray-200">{course.name}</p>
-                      {(course.topStudent ||
-                        course.link ||
-                        course.projectLinks?.length) && (
-                        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
-                          {course.topStudent &&
-                            (course.credential ? (
-                              <a
-                                href={course.credential}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={linkStyle}
-                              >
-                                Top student · View award ↗
-                              </a>
-                            ) : (
-                              <span className="text-sm text-blue-200">
-                                Top student
-                              </span>
-                            ))}
-                          {course.link && (
-                            <Link to={course.link} className={linkStyle}>
-                              {course.linkLabel}
-                            </Link>
-                          )}
-                          {course.projectLinks?.map((project) => (
-                            <Link
-                              key={project.href}
-                              to={project.href}
-                              className={linkStyle}
-                            >
-                              {project.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    {(course.grade === "A+" || course.status) && (
-                      <span
-                        aria-label={
-                          course.grade === "A+" ? "Grade A+" : course.status
-                        }
-                        className={
-                          "col-start-2 row-start-1 self-start rounded px-2 py-0.5 text-xs font-medium sm:col-start-3 " +
-                          (course.grade === "A+"
-                            ? "bg-blue-300/10 text-blue-200"
-                            : "bg-white/5 text-gray-300")
-                        }
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_10rem] lg:items-start lg:gap-12">
+          <div className="max-w-3xl min-w-0">
+            <h2 className="mb-8 text-2xl font-semibold text-gray-100">
+              Coursework
+            </h2>
+            <div className="space-y-10">
+              {groups.map((group) => (
+                <section key={group.id} id={group.id} aria-label={group.title}>
+                  <h3 className="mb-3 text-base font-semibold text-gray-200">
+                    {group.title}
+                  </h3>
+                  <ul className="divide-y divide-white/10">
+                    {group.courses.map((course) => (
+                      <li
+                        key={course.code}
+                        className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 py-4 sm:grid-cols-[6rem_minmax(0,1fr)_auto]"
                       >
-                        {course.grade === "A+" ? "A+" : course.status}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+                        <span className="text-sm font-medium text-gray-400">
+                          {course.code}
+                        </span>
+                        <div className="col-start-1 row-start-2 mt-1 min-w-0 sm:col-start-2 sm:row-start-1 sm:mt-0">
+                          <p className="text-base text-gray-200">
+                            {course.name}
+                          </p>
+                          {(course.topStudent ||
+                            course.link ||
+                            course.projectLinks?.length) && (
+                            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+                              {course.topStudent &&
+                                (course.credential ? (
+                                  <a
+                                    href={course.credential}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={linkStyle}
+                                  >
+                                    Top student · View award ↗
+                                  </a>
+                                ) : (
+                                  <span className="text-sm text-blue-200">
+                                    Top student
+                                  </span>
+                                ))}
+                              {course.link && (
+                                <Link to={course.link} className={linkStyle}>
+                                  {course.linkLabel}
+                                </Link>
+                              )}
+                              {course.projectLinks?.map((project) => (
+                                <Link
+                                  key={project.href}
+                                  to={project.href}
+                                  className={linkStyle}
+                                >
+                                  {project.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {(course.grade === "A+" || course.status) && (
+                          <span
+                            aria-label={
+                              course.grade === "A+" ? "Grade A+" : course.status
+                            }
+                            className={
+                              "col-start-2 row-start-1 self-start rounded px-2 py-0.5 text-xs font-medium sm:col-start-3 " +
+                              (course.grade === "A+"
+                                ? "bg-blue-300/10 text-blue-200"
+                                : "bg-white/5 text-gray-300")
+                            }
+                          >
+                            {course.grade === "A+" ? "A+" : course.status}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </div>
+          <PageIndexSidebar sections={indexSections} label="Education index" />
         </div>
       </section>
     </Container>

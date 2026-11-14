@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import { PageIndexMenu, PageIndexSidebar } from "@/components/PageIndex";
 
 interface Project {
   name: string;
@@ -146,165 +147,169 @@ const groups = [
   },
 ];
 
+function getProjectId(project: Project) {
+  return project.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
+
+const indexSections = groups.map((group) => ({
+  id: group.id,
+  title: group.title,
+  items: group.projects.map((project) => ({
+    id: getProjectId(project),
+    title: project.name,
+  })),
+}));
+
 export default function Projects() {
   return (
     <Container>
       <section className="w-full" aria-labelledby="projects-heading">
-        <header className="mb-12">
+        <header className="mb-12 flex items-center justify-between gap-6">
           <h1 id="projects-heading">Projects</h1>
-          <nav
-            aria-label="Project categories"
-            className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm"
-          >
-            {groups.map((group) => (
-              <a
-                key={group.id}
-                href={"#" + group.id}
-                className="py-1 underline"
-              >
-                {group.title}
-              </a>
-            ))}
-          </nav>
+          <PageIndexMenu sections={indexSections} label="Project index" />
         </header>
-        <div className="space-y-16 sm:space-y-20">
-          {groups.map((group) => (
-            <section
-              key={group.id}
-              id={group.id}
-              aria-labelledby={group.id + "-heading"}
-            >
-              <h2
-                id={group.id + "-heading"}
-                className="mb-8 border-b border-white/10 pb-4 text-lg font-semibold text-gray-200"
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_10rem] lg:items-start lg:gap-12">
+          <div className="min-w-0 space-y-16 sm:space-y-20">
+            {groups.map((group) => (
+              <section
+                key={group.id}
+                id={group.id}
+                aria-labelledby={group.id + "-heading"}
               >
-                {group.title}
-              </h2>
-              <div className="space-y-12 sm:space-y-16">
-                {group.projects.map((project) => (
-                  <article
-                    id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-                    key={project.name}
-                    className="w-full scroll-mt-6"
-                  >
-                    <div>
-                      <div className="grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12">
-                        <div>
-                          {project.period && (
-                            <p className="mb-3 text-sm text-gray-400">
-                              {project.period}
-                            </p>
-                          )}
-                          <h3 className="text-2xl leading-tight font-semibold tracking-tight text-gray-100 sm:text-3xl">
-                            {project.name}
-                          </h3>
-                          <p className="mt-3 text-sm text-blue-200">
-                            {project.role}
-                          </p>
-                          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 empty:hidden">
-                            {project.href && (
-                              <a
-                                href={project.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-sm text-blue-300 underline transition-colors hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
-                              >
-                                {project.linkLabel ?? "Visit " + project.name}
-                                <span
-                                  aria-hidden="true"
-                                  className="inline-block"
-                                >
-                                  ↗
-                                </span>
-                              </a>
+                <h2
+                  id={group.id + "-heading"}
+                  className="mb-8 border-b border-white/10 pb-4 text-lg font-semibold text-gray-200"
+                >
+                  {group.title}
+                </h2>
+                <div className="space-y-12 sm:space-y-16">
+                  {group.projects.map((project) => (
+                    <article
+                      id={getProjectId(project)}
+                      key={project.name}
+                      className="w-full scroll-mt-6"
+                    >
+                      <div>
+                        <div className="grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12">
+                          <div>
+                            {project.period && (
+                              <p className="mb-3 text-sm text-gray-400">
+                                {project.period}
+                              </p>
                             )}
-                            {project.extraLinks?.map((link) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-sm text-blue-300 hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
-                              >
-                                {link.label} <span aria-hidden="true">↗</span>
-                              </a>
-                            ))}
+                            <h3 className="text-2xl leading-tight font-semibold tracking-tight text-gray-100 sm:text-3xl">
+                              {project.name}
+                            </h3>
+                            <p className="mt-3 text-sm text-blue-200">
+                              {project.role}
+                            </p>
+                            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 empty:hidden">
+                              {project.href && (
+                                <a
+                                  href={project.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 text-sm text-blue-300 underline transition-colors hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+                                >
+                                  {project.linkLabel ?? "Visit " + project.name}
+                                  <span
+                                    aria-hidden="true"
+                                    className="inline-block"
+                                  >
+                                    ↗
+                                  </span>
+                                </a>
+                              )}
+                              {project.extraLinks?.map((link) => (
+                                <a
+                                  key={link.href}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-sm text-blue-300 hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+                                >
+                                  {link.label}{" "}
+                                  <span aria-hidden="true">↗</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-lg leading-relaxed text-gray-200">
+                              {project.summary}
+                            </p>
+                            <p className="mt-4 max-w-prose text-base leading-7 text-gray-400">
+                              {project.description}
+                            </p>
                           </div>
                         </div>
-                        <div>
-                          <p className="text-lg leading-relaxed text-gray-200">
-                            {project.summary}
-                          </p>
-                          <p className="mt-4 max-w-prose text-base leading-7 text-gray-400">
-                            {project.description}
-                          </p>
-                        </div>
-                      </div>
-                      {project.videoId && (
-                        <figure className="mt-10">
-                          <iframe
-                            src={
-                              "https://www.youtube-nocookie.com/embed/" +
-                              project.videoId
-                            }
-                            title={project.name + " demo"}
-                            width="960"
-                            height="540"
-                            loading="lazy"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            className="aspect-video h-auto w-full rounded-md border-0 bg-gray-900"
-                          />
-                          <figcaption className="mt-3 text-sm">
-                            <a
-                              href={
-                                "https://www.youtube.com/watch?v=" +
+                        {project.videoId && (
+                          <figure className="mt-10">
+                            <iframe
+                              src={
+                                "https://www.youtube-nocookie.com/embed/" +
                                 project.videoId
                               }
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-300 hover:text-blue-200"
-                            >
-                              Watch on YouTube{" "}
-                              <span aria-hidden="true">↗</span>
-                            </a>
-                          </figcaption>
-                        </figure>
-                      )}
-                      {project.screenshots && (
-                        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-                          {project.screenshots.map((screenshot) => (
-                            <figure key={screenshot.src} className="min-w-0">
+                              title={project.name + " demo"}
+                              width="960"
+                              height="540"
+                              loading="lazy"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                              className="aspect-video h-auto w-full rounded-md border-0 bg-gray-900"
+                            />
+                            <figcaption className="mt-3 text-sm">
                               <a
-                                href={screenshot.src}
+                                href={
+                                  "https://www.youtube.com/watch?v=" +
+                                  project.videoId
+                                }
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+                                className="text-blue-300 hover:text-blue-200"
                               >
-                                <img
-                                  src={screenshot.src}
-                                  alt={screenshot.alt}
-                                  width={1920}
-                                  height={1080}
-                                  loading="lazy"
-                                  decoding="async"
-                                  className="h-auto w-full rounded-md"
-                                />
+                                Watch on YouTube{" "}
+                                <span aria-hidden="true">↗</span>
                               </a>
-                              <figcaption className="mt-3 text-xs leading-relaxed text-gray-400">
-                                {screenshot.caption}
-                              </figcaption>
-                            </figure>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ))}
+                            </figcaption>
+                          </figure>
+                        )}
+                        {project.screenshots && (
+                          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                            {project.screenshots.map((screenshot) => (
+                              <figure key={screenshot.src} className="min-w-0">
+                                <a
+                                  href={screenshot.src}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+                                >
+                                  <img
+                                    src={screenshot.src}
+                                    alt={screenshot.alt}
+                                    width={1920}
+                                    height={1080}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="h-auto w-full rounded-md"
+                                  />
+                                </a>
+                                <figcaption className="mt-3 text-xs leading-relaxed text-gray-400">
+                                  {screenshot.caption}
+                                </figcaption>
+                              </figure>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+          <PageIndexSidebar sections={indexSections} label="Project index" />
         </div>
       </section>
     </Container>
