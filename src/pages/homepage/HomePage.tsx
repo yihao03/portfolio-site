@@ -13,16 +13,9 @@ export default function HomePage() {
         </h1>
         <div className="space-y-6 text-base leading-8 text-gray-300 sm:text-lg">
           <p>
-            I’m a Year 3 Computer Science student at NUS and{" "}
-            <a
-              href="https://nuscollege.nus.edu.sg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkStyle}
-            >
-              NUS College
-            </a>
-            .
+            I’m a Year 3 Computer Science student at NUS. I enjoy building interesting products and solving difficult problems. I’m also part of{" "}
+            <a href="https://nuscollege.nus.edu.sg" target="_blank" rel="noopener noreferrer" className={linkStyle}>NUS College</a>,
+            where I explore topics in philosophy, nature, and social issues like poverty.
           </p>
           <p>
             I care about making an impact through technology and through the
