@@ -22,13 +22,17 @@ const projects: Project[] = [
     summary:
       "Historical sources become playable worlds where students explore evidence, meet competing stakeholders and make consequential decisions.",
     description:
-      "Contributed the adventure generation pipeline, Phaser renderer and game client, and teacher-console generation flows. The platform lets teachers turn source material into interactive adventures, with a debrief that distinguishes documented history from simulation assumptions.",
+      "Contributed the adventure generation pipeline, Phaser renderer and game client, and teacher-console generation flows. The platform lets teachers turn source material into interactive adventures, with a debrief that distinguishes documented history from simulation assumptions. Our team won a Gold Award at the School of Computing’s 29th STePS and piloted the project in multiple schools, including Raffles Girls’ School and Temasek Junior College (TJC).",
     href: "https://historical-adventures-ten.vercel.app",
     linkLabel: "Explore the app",
     extraLinks: [
       {
         label: "Source code",
         href: "https://github.com/damiancxliew/CS3216_Assignment3",
+      },
+      {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/144036671",
       },
     ],
   },
