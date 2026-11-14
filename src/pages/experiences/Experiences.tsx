@@ -6,7 +6,8 @@ const experiences = [
     role: "Teaching Assistant",
     organisation: "National University of Singapore",
     period: "AY2025/26 Semester 2–Present",
-    summary: "Teaching assistant for CS2103T Software Engineering in AY2025/26 Semester 2 and AY2026/27 Semester 1.",
+    summary:
+      "Teaching assistant for CS2103T Software Engineering in AY2025/26 Semester 2 and AY2026/27 Semester 1.",
     highlights: [],
   },
   {
@@ -16,10 +17,17 @@ const experiences = [
     organisationHref: "https://www.comp.nus.edu.sg/~vwo/",
     period: "May–Aug 2026",
     links: [
-      { label: "Punaravartan · 2026", href: "https://www.comp.nus.edu.sg/~vwo/projects/2026-punaravartan.html" },
-      { label: "KWSH · 2026", href: "https://www.comp.nus.edu.sg/~vwo/projects/2026-kwsh.html" },
+      {
+        label: "Punaravartan · 2026",
+        href: "https://www.comp.nus.edu.sg/~vwo/projects/2026-punaravartan.html",
+      },
+      {
+        label: "KWSH · 2026",
+        href: "https://www.comp.nus.edu.sg/~vwo/projects/2026-kwsh.html",
+      },
     ],
-    summary: "Led five developers to build Project UMA, an intelligence platform for the Punaravartan Foundation, supporting the Cambodian government’s work to recover lost and stolen cultural artifacts.",
+    summary:
+      "Led five developers to build Project UMA, an intelligence platform for the Punaravartan Foundation, supporting the Cambodian government’s work to recover lost and stolen cultural artifacts.",
     highlights: [
       "Built a purpose-designed platform for a digital library of over 15,000 files, with customisable artifact metadata, tags and collections.",
       "Modelled relationships between artifacts, investigations, people, locations and events, with timelines to trace an object’s history.",
@@ -37,10 +45,24 @@ const experiences = [
       { label: "nusc.club", href: "https://nusc.club" },
       { label: "lms.nusc.club", href: "https://lms.nusc.club" },
     ],
-    summary: "Lead 12 developers across three teams building tools for the NUS College community.",
+    summary:
+      "Lead 12 developers across three teams building tools for the NUS College community.",
     highlights: [
       "Oversee venue booking, content management, Telegram automation and logistics systems.",
       "Work with student leaders and other stakeholders to turn community needs into practical tools for everyday use and event operations.",
+    ],
+  },
+  {
+    id: "remindme",
+    role: "Freelance Developer",
+    organisation: "MindSpark RUMC",
+    period: "Dec 2025–Mar 2026",
+    summary:
+      "Developed ReMindMe, a mobile application supporting dementia caregivers in Malaysia.",
+    highlights: [
+      "Built event discovery, educational resources, journaling and mood tracking, alongside an administrative dashboard for managing content and users.",
+      "Published the app on the App Store and Google Play.",
+      "Deployed backend services on AWS ECS and RDS, with traffic managed through Cloudflare.",
     ],
   },
   {
@@ -50,10 +72,17 @@ const experiences = [
     organisationHref: "https://www.comp.nus.edu.sg/~vwo/",
     period: "May–Aug 2025",
     links: [
-      { label: "KWSH · 2025", href: "https://www.comp.nus.edu.sg/~vwo/projects/2025-kwsh.html" },
-      { label: "AAC · 2025", href: "https://www.comp.nus.edu.sg/~vwo/projects/2025-aac.html" },
+      {
+        label: "KWSH · 2025",
+        href: "https://www.comp.nus.edu.sg/~vwo/projects/2025-kwsh.html",
+      },
+      {
+        label: "AAC · 2025",
+        href: "https://www.comp.nus.edu.sg/~vwo/projects/2025-aac.html",
+      },
     ],
-    summary: "Helped modernise a Home Personal Care system, migrating a legacy Ruby on Rails application to a multi-tenant React and Go architecture.",
+    summary:
+      "Helped modernise a Home Personal Care system, migrating a legacy Ruby on Rails application to a multi-tenant React and Go architecture.",
     highlights: [
       "Built real-time messaging between nurses and patients’ next of kin using WebSockets across web and React Native applications.",
       "Configured mobile release pipelines for the App Store and Google Play using Expo Application Services.",
@@ -64,34 +93,68 @@ const experiences = [
 export default function Experiences() {
   return (
     <Container>
-      <section className="mx-auto w-full max-w-4xl px-2 pb-12 sm:px-6" aria-labelledby="experience-heading">
-        <h1 id="experience-heading" className="mb-10 font-bold text-gray-100">Experience</h1>
-        <ol className="space-y-10 border-l border-gray-600 pl-5 sm:pl-8">
+      <section
+        className="w-full max-w-3xl"
+        aria-labelledby="experience-heading"
+      >
+        <h1 id="experience-heading" className="mb-12">
+          Experience
+        </h1>
+        <ol className="space-y-12 border-l border-gray-600 pl-5 sm:pl-8">
           {experiences.map((experience) => (
-            <li id={experience.id} key={experience.id} className="relative scroll-mt-6">
-              <span aria-hidden="true" className="absolute -left-[27px] top-2 h-3 w-3 rounded-full border-2 border-gray-800 bg-blue-300 sm:-left-[39px]" />
+            <li
+              id={experience.id}
+              key={experience.id}
+              className="relative scroll-mt-6"
+            >
+              <span
+                aria-hidden="true"
+                className="absolute top-2 -left-[27px] h-3 w-3 rounded-full border-2 border-gray-800 bg-blue-300 sm:-left-[39px]"
+              />
               <article>
-                <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                <div className="mb-2 flex flex-col gap-2">
                   <div>
-                    <h2 className="text-2xl font-semibold text-gray-100">{experience.role}</h2>
+                    <h2 className="text-2xl font-semibold tracking-tight text-gray-100">
+                      {experience.role}
+                    </h2>
                     <p className="mt-1 text-base text-blue-200">
-                      {"organisationHref" in experience && experience.organisationHref ? (
-                        <a href={experience.organisationHref} target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-blue-100 hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
+                      {"organisationHref" in experience &&
+                      experience.organisationHref ? (
+                        <a
+                          href={experience.organisationHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-200 underline-offset-4 hover:text-blue-100 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+                        >
                           {experience.organisation}
                         </a>
-                      ) : experience.organisation}
+                      ) : (
+                        experience.organisation
+                      )}
                     </p>
                   </div>
-                  <p className="shrink-0 text-sm text-gray-400">{experience.period}</p>
+                  <p className="text-sm text-gray-400">{experience.period}</p>
                 </div>
-                <p className="mt-4 leading-relaxed text-gray-300">{experience.summary}</p>
-                {experience.highlights.length > 0 && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed text-gray-400">
-                  {experience.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-                </ul>}
+                <p className="mt-4 leading-relaxed text-gray-300">
+                  {experience.summary}
+                </p>
+                {experience.highlights.length > 0 && (
+                  <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed text-gray-400">
+                    {experience.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+                )}
                 {"links" in experience && experience.links && (
                   <div className="mt-5 flex flex-wrap gap-4">
                     {experience.links.map((link) => (
-                      <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-300 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+                      >
                         {link.label} <span aria-hidden="true">↗</span>
                       </a>
                     ))}

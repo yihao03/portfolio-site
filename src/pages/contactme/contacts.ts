@@ -2,28 +2,29 @@ import type { Contact } from "@/types/contact";
 import { PiGithubLogoDuotone, PiLinkedinLogoDuotone } from "react-icons/pi";
 import { MdEmail } from "react-icons/md";
 
-const rawContacts: Contact[] = [
-  {
-    icon: PiGithubLogoDuotone,
-    name: "GitHub",
-    username: "yihao03",
-    link: "https://github.com/yihao03"
-  },
+export const contacts: Contact[] = [
   {
     icon: MdEmail,
     name: "Email",
+    username: "yihao.dev@gmail.com",
+    link: "mailto:yihao.dev@gmail.com",
+  },
+  {
+    icon: MdEmail,
+    name: "University email",
     username: "hyihao@u.nus.edu",
-    link: null
+    link: "mailto:hyihao@u.nus.edu",
   },
   {
     icon: PiLinkedinLogoDuotone,
     name: "LinkedIn",
     username: "Yi Hao Hon",
-    link: "https://www.linkedin.com/in/yihaooo"
-  }
-]
-
-export const contacts: Contact[] = rawContacts.sort(
-  (a, b) => Math.max(b.name.length, b.username.length)
-    - Math.max(a.name.length, a.username.length)
-)
+    link: "https://www.linkedin.com/in/yihaooo",
+  },
+  {
+    icon: PiGithubLogoDuotone,
+    name: "GitHub",
+    username: "yihao03",
+    link: "https://github.com/yihao03",
+  },
+];

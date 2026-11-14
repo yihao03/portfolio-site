@@ -3,12 +3,13 @@ import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 import type { Route } from "@/types/routes";
-import { Link, useLocation } from "react-router";
+import { NavLink } from "react-router";
+import { motion, useReducedMotion } from "motion/react";
 import { navigationMenuTriggerStyle } from "./styles";
 
-interface NavigationMenuItemProps extends React.ComponentProps<typeof NavigationMenuPrimitive.Item> {
+interface NavigationMenuItemProps
+  extends React.ComponentProps<typeof NavigationMenuPrimitive.Item> {
   object: Route;
 }
 
@@ -57,40 +58,39 @@ function NavigationMenuItem({
   object,
   ...props
 }: NavigationMenuItemProps) {
-  const location = useLocation();
-  const isSelected = location.pathname === object.path;
+  const reduceMotion = useReducedMotion();
 
   return (
-    <motion.li
-      initial={false}
-      animate={{
-        opacity: 1,
-      }}
-      whileHover={{
-        scale: 1.05,
-      }}
+    <NavigationMenuPrimitive.Item
+      data-slot="navigation-menu-item"
+      className={cn("min-w-0", className)}
+      {...props}
     >
-      <NavigationMenuPrimitive.Item
-        data-slot="navigation-menu-item"
-        className={cn("relative", className)}
-        asChild
-        {...props}
+      <NavLink
+        to={object.path}
+        end={object.path === "/"}
+        className="relative flex min-h-11 items-center justify-center text-base text-gray-400 hover:text-gray-300 sm:min-h-8"
       >
-        <div className="flex items-center">
-          <Link to={object.path}>
-            <p className="p-1 text-gray-400 transition-colors hover:text-gray-300 hover:bg-gray-700 rounded">
+        {({ isActive }) => (
+          <>
+            <motion.span
+              whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+              className="rounded p-1 transition-colors hover:bg-gray-700"
+            >
               {object.name}
-            </p>
-          </Link>
-          {isSelected &&
-            <motion.div
-              animate={{ scale: 1 }}
-              className="w-full absolute h-0.5 bottom-0 bg-gray-400 rounded-md"
-              layoutId="nav"
-            />}
-        </div>
-      </NavigationMenuPrimitive.Item>
-    </motion.li>
+            </motion.span>
+            {isActive && (
+              <motion.span
+                aria-hidden="true"
+                layoutId="nav"
+                transition={reduceMotion ? { duration: 0 } : undefined}
+                className="absolute inset-x-0 bottom-0 h-0.5 rounded-md bg-gray-400"
+              />
+            )}
+          </>
+        )}
+      </NavLink>
+    </NavigationMenuPrimitive.Item>
   );
 }
 

@@ -1,55 +1,36 @@
 import type { Contact } from "@/types/contact";
-import { motion } from "motion/react";
-import { useState } from "react";
-import { Link } from "react-router";
+import { ArrowUpRight } from "lucide-react";
 
-const ContactCard: React.FC<Contact> = (props: Contact) => {
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * 15;
-    const rotateY = ((x - centerX) / centerX) * 15;
-    setRotate({ x: -rotateX, y: rotateY });
-  };
-
-  const handleMouseLeave = () => {
-    setRotate({ x: 0, y: 0 });
-  };
-
+export default function ContactCard({
+  icon: Icon,
+  name,
+  username,
+  link,
+}: Contact) {
+  const isEmail = link.startsWith("mailto:");
   return (
-    <motion.div
-      style={{
-        opacity: 0.8,
-        boxShadow: `${-rotate.y / 2}px ${rotate.x / 2}px 20px 0px rgba(0,0,0,0.4)`
-      }}
-      whileHover={{
-        opacity: 0.9,
-        rotateX: rotate.x,
-        rotateY: rotate.y
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="m-4 align-center text-xl flex flex-col bg-gray-700 w-fit p-4 rounded-xl shadow-2xl"
-      drag
-      dragElastic={0.5}
-      dragConstraints={{ top: -125, right: 125, bottom: 125, left: -125 }}
-      dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+    <a
+      href={link}
+      target={isEmail ? undefined : "_blank"}
+      rel={isEmail ? undefined : "noopener noreferrer"}
+      className="group flex min-h-24 items-center gap-4 rounded-md px-2 py-5 hover:bg-white/5 sm:gap-5 sm:px-4"
     >
-      <div className="flex flex-row">
-        <props.icon className="text-2xl mr-2" />
-        <p>{props.name}</p>
-      </div>
-      <Link to={props.link ?? "#"}>
-        <p>{props.username}</p>
-      </Link>
-    </motion.div>
-  )
+      <Icon
+        aria-hidden="true"
+        className="size-6 shrink-0 text-gray-400 group-hover:text-blue-200"
+      />
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm text-gray-400">{name}</span>
+        <span className="mt-1 block text-base break-words text-blue-300 group-hover:underline sm:text-lg">
+          {username}
+        </span>
+      </span>
+      {!isEmail && (
+        <ArrowUpRight
+          aria-hidden="true"
+          className="size-4 shrink-0 text-gray-400"
+        />
+      )}
+    </a>
+  );
 }
-
-export default ContactCard;

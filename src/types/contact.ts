@@ -4,5 +4,5 @@ export interface Contact {
   icon: IconType;
   name: string;
   username: string;
-  link: string | null;
+  link: string;
 }
